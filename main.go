@@ -26,8 +26,21 @@ func pathHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//Router routs page requests to the correct function
+// type Router struct{}
+
+// func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// 	switch r.URL.Path {
+// 	case "/":
+// 		homeHandler(w, r)
+// 	case "/contact":
+// 		contactHandler(w, r)
+// 	default:
+// 		http.Error(w, "Page Not Found", http.StatusNotFound)
+// 	}
+// }
+
 func main() {
-	http.HandleFunc("/", pathHandler)
 	fmt.Println("Starting the server on :3000...")
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3000", http.HandlerFunc(pathHandler))
 }
